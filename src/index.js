@@ -1,6 +1,5 @@
 const express = require("express");
 const { slackEvents } = require('./events');
-const { webClient } = require('./webclient');
 
 const PORT = process.env.PORT || 8080;
 
@@ -8,6 +7,10 @@ const app = express();
 
 app.use("/api/events/", slackEvents.requestListener());
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.status(200).send("App statu: Online");
+})
 
 app.listen(PORT, async () => {
   /*
