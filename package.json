@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/pesos/pesos-butler#readme",
   "dependencies": {
+    "@octokit/core": "^3.2.5",
     "@slack/events-api": "^3.0.0",
     "@slack/interactive-messages": "^2.0.0",
     "@slack/web-api": "^6.0.0",
