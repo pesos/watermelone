@@ -1,7 +1,7 @@
 {
-  "name": "pesos_slack_bot",
-  "version": "0.0.1",
-  "description": "An onboarding bot for PES Open Source.",
+  "name": "watermelone",
+  "version": "0.0.2",
+  "description": "A helper bot for PES Open Source.",
   "main": "src",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pesos/pesos-butler.git"
+    "url": "git+https://github.com/pesos/watermelone.git"
   },
   "author": "PES Open Source",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pesos/pesos-butler/issues"
+    "url": "https://github.com/pesos/watermelone/issues"
   },
-  "homepage": "https://github.com/pesos/pesos-butler#readme",
+  "homepage": "https://github.com/pesos/watermelone#readme",
   "dependencies": {
     "@octokit/core": "^3.2.5",
     "@slack/events-api": "^3.0.0",

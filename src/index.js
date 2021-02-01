@@ -1,6 +1,6 @@
 const express = require("express");
-const { slackEvents } = require('./events');
-const commandsRouter = require("./commands");
+const { slackEvents } = require("./slack/events");
+const commandsRouter = require("./slack/commands");
 
 const PORT = process.env.PORT || 8080;
 
