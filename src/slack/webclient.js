@@ -53,6 +53,18 @@ async function createModal() {
     await webClient.views.open().catch(console.error);
 }
 
+async function callOauth(code) {
+    var res = await webClient.oauth.v2.access(
+        {
+            code: code,
+            client_id: process.env.CLIENT_ID,
+            client_secret: process.env.CLIENT_SECRET
+        }
+    ).catch(console.error);
+    if (res.ok == true) return 1; else return 0;
+}
+
 exports.sendText = sendText;
 exports.sendBlocks = sendBlocks;
 exports.sendFirstGreet = sendFirstGreet;
+exports.callOauth = callOauth;
