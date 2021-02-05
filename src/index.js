@@ -1,6 +1,5 @@
 const express = require("express");
 const { slackEvents } = require("./slack/events");
-const { slackInteractions } = require("./slack/interactions");
 const commandsRouter = require("./slack/commands");
 
 const PORT = process.env.PORT || 8080;
@@ -8,7 +7,6 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.use("/api/events/", slackEvents.requestListener());
-app.use("/api/interactions/", slackInteractions.requestListener());
 app.use(express.json());
 app.use("/api/commands/", commandsRouter);
 
