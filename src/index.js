@@ -2,6 +2,7 @@ const express = require("express");
 const { slackEvents } = require("./slack/events");
 const commandsRouter = require("./slack/commands");
 const oauthRouter = require("./slack/outh");
+const devRoute = require("./routes/dev_test.route");
 
 const PORT = process.env.PORT || 8080;
 
@@ -11,6 +12,7 @@ app.use("/api/events/", slackEvents.requestListener());
 app.use("/api/oauth/", oauthRouter);
 app.use(express.json());
 app.use("/api/commands/", commandsRouter);
+app.use("/dev/db", devRoute);
 
 app.get('/', (req, res) => {
   res.status(200).send("App status: Online");
