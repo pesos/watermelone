@@ -3,6 +3,8 @@ const { WebClient } = require("@slack/web-api");
 //const SLACK_TOKEN = process.env.SLACK_TOKEN;
 const webClient = new WebClient();
 
+const {saveToken} = require('../database/pg');
+
 
 async function sendFirstGreet(_cid) {
     await webClient.chat.postEphemeral({
@@ -61,6 +63,7 @@ async function callOauth(code) {
             client_secret: process.env.CLIENT_SECRET
         }
     ).catch(console.error);
+    await saveToken(res.team.id,res.access_token);
     if (res.ok == true) return 1; else return 0;
 }
 
