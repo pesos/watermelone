@@ -15,7 +15,7 @@ async function sendFirstGreet(_cid, _team_id) {
         }
     });
     client.connect();
-    client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, (err, res) => {
+    client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, async (err, res) => {
         if (err) console.error(err);
         await webClient.chat.postEphemeral({
             user: _cid,
@@ -60,7 +60,7 @@ async function sendText(_cid, _message, _team_id) {
         }
     });
     client.connect();
-    client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, (err, res) => {
+    client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, async (err, res) => {
         if (err) throw err;
         await webClient.chat
             .postMessage({ channel: _cid, text: _message, token: res[0] })
@@ -76,11 +76,10 @@ async function sendBlocks(_cid, _message, _token) {
         }
     });
     client.connect();
-    client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, (err, res) => {
+    client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, async (err, res) => {
         await webClient.chat.postMessage({
             channel: _cid,
             blocks: _message,
-            token: res[0]
         }).catch(console.error)
     })
 }
