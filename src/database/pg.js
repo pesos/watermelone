@@ -9,13 +9,18 @@ async function display_tokens(){
         }
     });
     client.connect();
-    var temp; 
-    client.query("SELECT * FROM app_tokens;", (err, res) => {
+    let r = await client.query("SELECT * FROM app_tokens;", async (err, res) => {
         if(err) console.error(err);
-        else temp = res; 
+        client.end();
+        //console.log(JSON.stringify(res)); 
     })
-    client.end();
-    return temp; 
+    let rows = [];
+    for (let row of r.rows){
+        //console.log(row.bot_token);
+        rows.push(row.bot_token);
+        //NEED TO USE A CALLBACK
+    }
+    return rows; 
 }
 
 async function saveToken(team_id, token){
@@ -26,10 +31,10 @@ async function saveToken(team_id, token){
         }
     });
     client.connect();
-    client.query(`INSERT INTO app_tokens values('${team_id}','${token}')`, (err, res) => {
+    client.query(`INSERT INTO app_tokens values('${team_id}','${token}');`, (err, res) => {
         if(err) console.error(error);
+        client.end();
     })
-    client.end();
 }
 
 exports.display_tokens = display_tokens;
