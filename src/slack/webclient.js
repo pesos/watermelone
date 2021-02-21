@@ -64,7 +64,7 @@ async function sendText(_cid, _message, _team_id) {
         if (err) throw err;
         console.log(res);
         await webClient.chat
-            .postMessage({ channel: _cid, text: _message, token: res[0] })
+            .postMessage({ channel: _cid, text: _message, token: res[0]["bot_token"] })
             .catch(console.error);
     })
 }
