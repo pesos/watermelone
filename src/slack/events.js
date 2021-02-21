@@ -9,6 +9,8 @@ const slackEvents = createEventAdapter(SLACK_SIGNING_SECRET, {
 const { sendBlocks, sendText, sendFirstGreet } = require("./webclient");
 
 slackEvents.on("message", async (ev, body) => {
+  console.log(body.team_id);
+  console.log(ev.user);
   if (ev.channel_type === "im") {
     if (ev.text.includes("Hello!")) {
       await sendText(ev.user, "Hello there! This is a DM!", body.team_id);
