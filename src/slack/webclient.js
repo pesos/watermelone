@@ -17,9 +17,10 @@ async function sendFirstGreet(_cid, _team_id) {
     client.connect();
     client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, async (err, res) => {
         if (err) console.error(err);
+        let _token = res.rows[0]["bot_token"];
         await webClient.chat.postEphemeral({
             user: _cid,
-            token: res[0],
+            token: _token,
             channel: "#general",
             text: "Hi there! Welcome to PES Open Source!",
             attachments: [{
@@ -29,7 +30,7 @@ async function sendFirstGreet(_cid, _team_id) {
         }).catch(console.error)
         await webClient.chat.postMessage({
             channel: _cid,
-            token: res[0],
+            token: _token,
             blocks: [
                 {
                     "type": "header",
@@ -62,7 +63,6 @@ async function sendText(_cid, _message, _team_id) {
     client.connect();
     client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, async (err, res) => {
         if (err) throw err;
-        console.log(res);
         let _token = res.rows[0]['bot_token']
         await webClient.chat
             .postMessage({ channel: _cid, text: _message, token: _token })
@@ -79,8 +79,10 @@ async function sendBlocks(_cid, _message, _token) {
     });
     client.connect();
     client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, async (err, res) => {
+        let _token = res.rows[0]["bot_token"];
         await webClient.chat.postMessage({
             channel: _cid,
+            token: _token,
             blocks: _message,
         }).catch(console.error)
     })
