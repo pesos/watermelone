@@ -63,7 +63,7 @@ async function sendText(_cid, _message, _team_id) {
     client.query(`SELECT bot_token from app_tokens where team_id='${_team_id}';`, async (err, res) => {
         if (err) throw err;
         console.log(res);
-        let _token = res.row[0]['bot_token']
+        let _token = res.rows[0]['bot_token']
         await webClient.chat
             .postMessage({ channel: _cid, text: _message, token: _token })
             .catch(console.error);
